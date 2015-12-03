@@ -3,7 +3,7 @@
 <html>
 <head>
     <!-- balises meta pour le mobile-->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
@@ -34,30 +34,10 @@
         
         <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
 
-        <script src="{{ asset('/js/ripples.min.js') }}"></script>
-        <script src="{{ asset('/js/material.min.js') }}"></script>
-        <script>
-          window.fbAsyncInit = function() {
-            FB.init({
-              appId      : '497393580435942',
-              xfbml      : true,
-              version    : 'v2.5'
-            });
-          };
+        <!-- Maps -->
+        <script src="https://maps.googleapis.com/maps/api/js"></script>
+        <script src="{{ asset('/js/maps.js') }}"></script>
 
-          (function(d, s, id){
-             var js, fjs = d.getElementsByTagName(s)[0];
-             if (d.getElementById(id)) {return;}
-             js = d.createElement(s); js.id = id;
-             js.src = "//connect.facebook.net/en_US/sdk.js";
-             fjs.parentNode.insertBefore(js, fjs);
-           }(document, 'script', 'facebook-jssdk'));
-
-            $(document).ready(function() {
-                    // This command is used to initialize some elements and make them work properly
-                    $.material.init();
-                });
-        </script>
     {% endblock %}
 
 
