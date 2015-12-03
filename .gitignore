@@ -1,2 +1,7 @@
 # remove vendor, instead use composer install to get vendors
-/vendor/
+composer.lock
+composer.phar
+vendor
+web/config/setting.yml
+web/cache
+

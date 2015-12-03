@@ -1,0 +1,26 @@
+{% extends 'base.twig' %}
+
+{% block body %}
+    {% block nav %}
+        <header class="header">
+            <nav >
+                <ul>
+                    <li><a href="{{ path('Accueil') }}">Accueil</a></li>
+                    <li><a href="{{ path('Info') }}">Info</a></li>
+                    <li><a href="{{ path('Contact') }}">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+    {% endblock %}
+
+    {% block content %}
+
+    {% endblock %}
+
+    {% block footer %}
+        <footer class="footer">
+            Mon adresse : 10 rue ...
+        </footer>
+    {% endblock %}
+{% endblock %}
+

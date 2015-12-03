@@ -1,0 +1,22 @@
+{% extends 'V2/layout.twig' %}
+{% block content %}
+
+<main class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="col-md-12">
+        {% for message in app.session.getFlashBag.get('message') %}
+        <div class="alert alert-dismissable alert-warning">
+    {{ message }}
+    </div>
+{% endfor %}
+            <h2>contact</h2>
+				<form action="#" method="post">
+				    {{ form_widget(form) }}
+
+				    <input type="submit" name="submit" />
+				</form>
+        </div>
+    </div>
+</main>
+{% endblock %}

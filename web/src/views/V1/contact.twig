@@ -1,0 +1,14 @@
+{% extends 'V1/layout.twig' %}
+{% block content %}
+<h1>Contact</h1>
+{% for message in app.session.getFlashBag.get('message') %}
+    {{ message }}
+{% endfor %}
+<div>
+	<form action="#" method="post">
+	    {{ form_widget(form) }}
+
+	    <input type="submit" name="submit" />
+	</form>
+</div>
+{% endblock %}

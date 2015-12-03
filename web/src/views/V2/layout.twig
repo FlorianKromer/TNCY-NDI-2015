@@ -1,0 +1,71 @@
+{% extends 'base.twig' %}
+
+{% block body %}
+    {% block nav %}
+        <header class="container">
+            <nav class="navbar navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="{{ path('Accueil') }}">Projet tut</a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right cl-effect-4">
+                            <li class="active"><a href="{{ path('Accueil') }}">Accueil</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Menu <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{ path('Blog') }}" >blog</a></li>
+                                    <li><a href="#">Item 2</a></li>
+                                    <li><a href="#">Item 3</a></li>
+                                </ul>
+                            </li>
+                            
+                            <li><a href="{{ path('Info') }}">Info</a></li>
+                            <li><a href="{{ path('Contact') }}">Contact</a></li>
+                            {% if app.user %}
+                                <li><p>Hello {{ app.user.username }}!</p></li>
+                            {% endif %}
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </nav>
+        </header>
+    {% endblock %}
+
+    {% block content %}
+
+    {% endblock %}
+
+    {% block footer %}
+        <footer class="footer hidden-xs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5">
+                        <address class="adresse" itemscope itemtype="http://schema.org/LocalBusiness">
+                             <h4><span itemprop="name">Projet tut enterprise </span></h4>
+                             <h5> <span itemprop="description">description</span></h5>
+                             <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                                <span itemprop="streetAddress"> 10 rue de la gare</span><br>
+                                <span itemprop="postalCode">54000 </span>
+                                <span itemprop="addressLocality">NANCY (France)</span>
+                            </div>
+                            Tel: <span itemprop="telephone">03.22.55.27.29</span>
+                        </address>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="pull-right"> 
+                            <small>Copyright {{"now"|date('Y')}} | Projet.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    {% endblock %}
+{% endblock %}
+

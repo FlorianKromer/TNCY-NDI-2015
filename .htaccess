@@ -1,0 +1,7 @@
+<IfModule mod_rewrite.c>
+	RewriteEngine on
+	#uncomment next line if silex app root is in a mamp subdirectory
+	RewriteBase /SilexTuto/
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^ web/index.php [L]
+</IfModule>
