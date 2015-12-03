@@ -8,9 +8,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 //Acceuil
 $app->get('/', function () use ($app) {
-    $sql = "SELECT * FROM crise";
-    //$crises = $app['db']->fetchAll($sql);
-    $crises = array();
+    $sql = "SELECT * FROM Crise";
+    $crises = $app['db']->fetchAll($sql);
+    var_dump($crises);
+    
     return $app['twig']->render(VERSION.'accueil.twig', array('crises' => $crises));
 
 })->bind('Accueil');

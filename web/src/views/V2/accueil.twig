@@ -36,11 +36,12 @@
 {% endblock %}
 
 {% block javascripts %}  
-  {{ parent() }}
   <script>
-  var liste_crise;
+  var liste_crise=[];
   {% for crise in crises %}
-      liste_crise.push({ {{crise.id}} })
+      var tmp ={id:{{crise.idCrise}}, lat:{{crise.latitude}}, lng:{{crise.longitude}}};
+      liste_crise.push( tmp );
   {% endfor %}
   </script>
+  {{ parent() }}
 {% endblock %}

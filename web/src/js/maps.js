@@ -15,6 +15,7 @@ function initialize() {
     return;
   }
 
+  console.debug(liste_crise);
 
 
   function initMap (infos) {
@@ -31,6 +32,13 @@ function initialize() {
             position: myLatlng,
             map: map,
             icon: im
+    });
+
+    liste_crise.forEach(function(crise) {
+       new google.maps.Marker({
+            position: new google.maps.LatLng(crise.lat,crise.lng) ,
+            map: map
+        });
     });
 
   }
@@ -52,7 +60,7 @@ function initialize() {
     navigator.geolocation.getCurrentPosition(geoSuccess, geoFail, { timeout: 30000 });
 
   }else {
-    console.log('Geolocation is not supported for this Browser/OS version yet.\n using Webapp info');
+    console.log('Geolocation is not supported for this Browser/OS version yet.\n using default position');
     initMap(info);
   }
 
