@@ -1,0 +1,2 @@
+# remove vendor, instead use composer install to get vendors
+/vendor/
