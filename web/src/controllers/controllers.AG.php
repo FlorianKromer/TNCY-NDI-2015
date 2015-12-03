@@ -95,9 +95,6 @@ $app->get('/crise/{name}/{id}', function ($name,$id) use ($app) {
 		
 		$sql = "SELECT * FROM Crise WHERE idCrise = ?";
 		$crise = $app['db']->fetchAssoc($sql, array((int)$id));
-		
-	
-	var_dump($crise);
 	
     return $app['twig']->render(VERSION.'detail.twig', array("crise"=>$crise));
 })->bind('Info');
