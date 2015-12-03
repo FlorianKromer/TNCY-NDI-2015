@@ -90,17 +90,18 @@ $app->match('/Inscription', function (Request $request) use ($app) {
 })
 ->bind('Inscription');
 
-/*$app->get('/crise/{name}/{id}', function ($name,$id) use ($app) {
+$app->get('/crise/{name}/{id}', function ($name,$id) use ($app) {
 	// do something with the data
-		$sql = "SELECT * FROM GrandActeur where";
 		
-		// $sql = "SELECT * FROM GrandActeur WHERE nomGrandActeur = '?' AND mdpGrandActeur = '?';";
-		 
-		$crise = $app['db']->fetchAssoc($sql, array( $data["name"], sha1($data["mdp"])));
-	var_dump($post);
+		$sql = "SELECT * FROM Crise WHERE idCrise = ?";
+		$crise = $app['db']->fetchAssoc($sql, array((int)$id));
+		
+	
+	var_dump($crise);
+	
     return $app['twig']->render(VERSION.'detail.twig', array("crise"=>$crise));
 })->bind('Info');
-*/
+
 
 /*
 //ETAPE 1 : une route
