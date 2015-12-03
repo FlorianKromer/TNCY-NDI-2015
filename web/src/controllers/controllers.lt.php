@@ -46,7 +46,7 @@ $app->match('/creation_crise', function (Request $request) use ($app) {
 		$app['session']->getFlashBag()->add('message', 'Merci pour votre message '.$data["name"]);
 		
 		//todo : insertion dans la base de données
-		$sql = "Insert INTO "
+		$sql = "Insert INTO ";
 		
         // redirect somewhere
         return $app->redirect('contact',301);
