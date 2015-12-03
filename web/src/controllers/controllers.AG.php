@@ -34,7 +34,7 @@ $app->match('/Connexion', function (Request $request) use ($app) {
 		 $sql = "SELECT * FROM GrandActeur WHERE nomGrandActeur = '?' AND mdpGrandActeur = '?';";
 		 
 		$post = $app['db']->fetchAssoc($sql, array( $data["name"], sha1($data["mdp"])));
-	
+		
 		$app['session']->getFlashBag()->add('message', 'nom: '.$data["name"].', mot de passe: '.sha1($data["mdp"]));
         // redirect somewhere
         return $app->redirect('Connexion',301);
@@ -47,7 +47,7 @@ $app->match('/Connexion', function (Request $request) use ($app) {
 
 /////
 $app->match('/Inscription', function (Request $request) use ($app) {
-  /*  // some default data for when the form is displayed the first time
+   // some default data for when the form is displayed the first time
     $data = array();
 //user mdp mdp2 idcateg
     $form = $app['form.factory']->createBuilder('form', $data)
@@ -57,6 +57,12 @@ $app->match('/Inscription', function (Request $request) use ($app) {
         ->add('mdp', 'password', array(
         'attr' => array('placeholder' => 'mot de passe','class'=>''),
         'label' => 'Mot de passe: '))
+		->add('mdp2', 'password', array(
+        'attr' => array('placeholder' => 'mot de passe','class'=>''),
+        'label' => 'Confirmer mot de passe'))
+		->add('categ', 'text', array(
+        'attr' => array('placeholder' => 'categorie','class'=>''),
+        'label' => 'Categorie: '))
         
         ->getForm();
 
@@ -65,22 +71,36 @@ $app->match('/Inscription', function (Request $request) use ($app) {
     if ($form->isValid()) {
         $data = $form->getData();
         // do something with the data
-		
-		 $sql = "SELECT * FROM GrandActeur WHERE nomGrandActeur = '?' AND mdpGrandActeur = '?';";
+		if($data["mdp"] != $data["mdp2"]) {
+			$app['session']->getFlashBag()->add('message', 'Mot de passe different');
+		}
+		else {
+		$sql = "INSERT INTO GrandActeur (nomGrandActeur, mdpGrandActeur, idCateg) VALUE (?,?,?);";
 		 
-		$post = $app['db']->fetchAssoc($sql, array( $data["name"], sha1($data["mdp"])));
+		$post = $app['db']->executeUpdate($sql, array( $data["name"], sha1($data["mdp"]), (INT)$data["categ"]));
 	
-		$app['session']->getFlashBag()->add('message', 'nom: '.$data["name"].', mot de passe: '.sha1($data["mdp"]));
+		$app['session']->getFlashBag()->add('message', 'nom: '.$data["name"].', mot de passe: '.sha1($data["mdp"].', categorie: '.$data["categ"]));
+		}
         // redirect somewhere
-        return $app->redirect('Connexion',301);
+        return $app->redirect('Inscription',301);
     }
 
     // display the form
-    return $app['twig']->render(VERSION.'inscription.twig', array('form' => $form->createView()));*/
+    return $app['twig']->render(VERSION.'inscription.twig', array('form' => $form->createView()));
 })
 ->bind('Inscription');
 
-
+/*$app->get('/crise/{name}/{id}', function ($name,$id) use ($app) {
+	// do something with the data
+		$sql = "SELECT * FROM GrandActeur where";
+		
+		// $sql = "SELECT * FROM GrandActeur WHERE nomGrandActeur = '?' AND mdpGrandActeur = '?';";
+		 
+		$crise = $app['db']->fetchAssoc($sql, array( $data["name"], sha1($data["mdp"])));
+	var_dump($post);
+    return $app['twig']->render(VERSION.'detail.twig', array("crise"=>$crise));
+})->bind('Info');
+*/
 
 /*
 //ETAPE 1 : une route
