@@ -33,7 +33,7 @@
   <script>
   var liste_crise=[];
   {% for crise in crises %}
-      var tmp ={id:{{crise.idCrise}}, lat:{{crise.latitude}}, lng:{{crise.longitude}} , nom:"{{crise.titre}}"  };
+      var tmp ={id:{{crise.idCrise}}, lat:{{crise.latitude}}, lng:{{crise.longitude}} , nom:"{{crise.titre}}" , rayon: {{crise.rayon}}};
       liste_crise.push( tmp );
   {% endfor %}
   </script>

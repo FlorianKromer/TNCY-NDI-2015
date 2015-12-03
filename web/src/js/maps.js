@@ -22,7 +22,7 @@ function initialize() {
     myLatlng = new google.maps.LatLng(info["Lat"],info["Lng"])
     var mapOptions = {
       center: myLatlng,
-      zoom: 10,
+      zoom: 7,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }
 
@@ -35,14 +35,14 @@ function initialize() {
     });
 
     liste_crise.forEach(function(crise) {
-
+        var tmpLatLng=new google.maps.LatLng(crise.lat,crise.lng);
         var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(crise.lat,crise.lng) ,
+            position: tmpLatLng ,
             map: map,
             title: crise.nom
         });
 
-        var link =  crise.nom.split(' ').join('_')+'_'+crise.id
+        var link =  crise.nom.split(' ').join('_')+'/'+crise.id
         var myWindowOptions = {
         content: '<a href="crise/'+link+'">'+crise.nom+' </a>'
         };
@@ -52,6 +52,18 @@ function initialize() {
         // Affichage de la fenêtre au click sur le marker
         google.maps.event.addListener(marker, 'click', function() {
           myInfoWindow.open(map,marker);
+        });
+
+
+        currentCircle=new google.maps.Circle({
+          strokeColor: '#198C19',
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: '#198C19',
+          fillOpacity: 0.35,
+          map: map,
+          center: tmpLatLng,
+          radius: crise.rayon * 1000
         });
 
 
