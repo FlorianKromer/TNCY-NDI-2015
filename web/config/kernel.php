@@ -35,7 +35,7 @@ $app['twig'] = $app->share($app->extend('twig', function($twig, $app) {
     $twig->addFunction(new \Twig_SimpleFunction('asset', function ($asset) {
         // TODO: replace silextuto par une variable
 
-        return sprintf('/silexTuto/web/src/%s', ltrim($asset, '/'));
+        return sprintf('/TNCY-NDI-2015/web/src/%s', ltrim($asset, '/'));
     }));
 
     return $twig;
