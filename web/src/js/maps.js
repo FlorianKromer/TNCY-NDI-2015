@@ -35,10 +35,27 @@ function initialize() {
     });
 
     liste_crise.forEach(function(crise) {
-       new google.maps.Marker({
+
+        var marker = new google.maps.Marker({
             position: new google.maps.LatLng(crise.lat,crise.lng) ,
-            map: map
+            map: map,
+            title: crise.nom
         });
+
+        var link =  crise.nom.split(' ').join('_')+'_'+crise.id
+        var myWindowOptions = {
+        content: '<a href="crise/'+link+'">'+crise.nom+' </a>'
+        };
+
+        var myInfoWindow = new google.maps.InfoWindow(myWindowOptions);
+
+        // Affichage de la fenêtre au click sur le marker
+        google.maps.event.addListener(marker, 'click', function() {
+          myInfoWindow.open(map,marker);
+        });
+
+
+
     });
 
   }
@@ -52,6 +69,7 @@ function initialize() {
     var geoSuccess = function(position) {
       info["Lat"]=position.coords.latitude;
       info["Lng"]=position.coords.longitude;
+
       initMap(info);
     };
     var geoFail = function(position) {
@@ -66,4 +84,5 @@ function initialize() {
 
 
 }
+
 google.maps.event.addDomListener(window, 'load', initialize);
