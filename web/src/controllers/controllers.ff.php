@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 $app->get('/', function () use ($app) {
     $sql = "SELECT * FROM Crise";
     $crises = $app['db']->fetchAll($sql);
-    var_dump($crises);
+    //var_dump($crises);
     
     return $app['twig']->render(VERSION.'accueil.twig', array('crises' => $crises));
 

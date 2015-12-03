@@ -16,12 +16,6 @@
                       <span style="VISIBILITY:hidden;display:none">
                       </span>
                     </div>
-                    <div
-                    class="fb-like"
-                    data-share="true"
-                    data-width="450"
-                    data-show-faces="true">
-                  </div>
                 </div>
 
 
@@ -39,7 +33,7 @@
   <script>
   var liste_crise=[];
   {% for crise in crises %}
-      var tmp ={id:{{crise.idCrise}}, lat:{{crise.latitude}}, lng:{{crise.longitude}}};
+      var tmp ={id:{{crise.idCrise}}, lat:{{crise.latitude}}, lng:{{crise.longitude}} , nom:"{{crise.titre}}"  };
       liste_crise.push( tmp );
   {% endfor %}
   </script>
