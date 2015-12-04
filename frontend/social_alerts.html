@@ -143,22 +143,22 @@
 			<fieldset>
 				<legend>Destinations</legend>
 				
-				<div class="form-group">
+				<div class="form-group" id="destinations-boxes">
 					  <label class="col-lg-2 control-label">Réseaux sociaux</label>
 					  <div class="col-lg-10">
 						<div class="checkbox">
 						  <label>
-							<input type="checkbox" name="socialNetwork" value="twitter"> <i class="fa fa-twitter"></i> Twitter
+							<input type="checkbox" name="socialNetwork" value="twitter"> <span><i class="fa fa-twitter"></i> Twitter</span>
 						  </label>
 						</div>
 						<div class="checkbox">
 						  <label>
-							<input type="checkbox" name="socialNetwork" value="facebook"> <i class="fa fa-facebook"></i> Facebook
+							<input type="checkbox" name="socialNetwork" value="facebook"> <span><i class="fa fa-facebook"></i> Facebook</span>
 						  </label>
 						</div>
 						<div class="checkbox">
 						  <label>
-							<input type="checkbox" name="socialNetwork" value="instagram"> <i class="fa fa-instagram"></i> Instagram
+							<input type="checkbox" name="socialNetwork" value="instagram"> <span><i class="fa fa-instagram"></i> Instagram</span>
 						  </label>
 						</div>
 					  </div>
@@ -167,12 +167,12 @@
 					  <div class="col-lg-10">
 						<div class="checkbox">
 						  <label>
-							<input type="checkbox" name="medias" value="tv"> <i class="fa fa-television"></i> Télévision
+							<input type="checkbox" name="medias" value="tv"> <span><i class="fa fa-television"></i> Télévision</span>
 						  </label>
 						</div>
 						<div class="checkbox">
 						  <label>
-							<input type="checkbox" name="medias" value="radio"> <i class="fa fa-mixcloud"></i> Radio
+							<input type="checkbox" name="medias" value="radio"> <span><i class="fa fa-mixcloud"></i> Radio</span>
 						  </label>
 						</div>
 					  </div>
@@ -183,7 +183,8 @@
 			<div class="form-group">
 			  <div class="col-lg-10 col-lg-offset-2">
 				<button type="reset" class="btn btn-default">Annuler</button>
-				<button type="submit" class="btn btn-primary">Valider</button>
+				<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#validationModal">Valider</button>
+				<button type="submit" style="visibility:hidden;" id="submitMainForm"></button>
 			  </div>
 			</div>
 		</form>
@@ -255,10 +256,72 @@
 		</footer>
 	<!-- Fin footer -->
 	
+<!-- Modal -->
+<div id="validationModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Validation alerte publique</h4>
+      </div>
+      <div class="modal-body">
+		  <p>Vous avez défini l'alerte suivante :</p>
+		  <h3>Titre</h3>
+		  <p class="alert-title"></p>
+		  <h3>Message</h3>
+		  <p class="alert-message"></p>
+		  <h3>Médias cibles :</h3>
+		  <ul class="alert-medias">
+		  </ul>
+		  <p>Si vous êtes sûr de vouloir déployer cette alerte sur les médias concernés, validez.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-primary" onclick="submitMainForm();">Confirmer</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+	
 	    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	    <!-- Include all compiled plugins (below), or include individual files as needed -->
 	    <script src="js/bootstrap.min.js"></script>
+	    
+	    
+	    
+<script>
+		$("#validationModal").on("shown.bs.modal", function() { 
+			var title = $('#inputTitle').val();
+			var message = $('#message').val();
+			var type = $('#crisisType option:selected').text();
+			var medias = [];
+			$('#destinations-boxes input:checked').each(function(){
+				var content = $(this).next().html();
+				medias.push(content);
+			});
+			console.log(title, message, type, medias);
+			$(this).find('.alert-title').append(title);
+			$(this).find('.alert-message').append(message);
+			$.each(medias, function(index, value) {
+				$('.alert-medias').append('<li>'+value+'</li>');
+			});	
+		});
+		
+		$("#validationModal").on('hidden.bs.modal', function() {
+			$(this).find('.alert-title').empty();
+			$(this).find('.alert-message').empty();
+			$(this).find('.alert-medias').empty();
+		});
+
+		function submitMainForm() {
+			$('#submitMainForm').click();
+		}
+</script>
+
 	  </body>
 	</html>
 	
