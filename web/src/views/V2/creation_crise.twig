@@ -1,22 +1,111 @@
-{% extends 'V2/layout.twig' %}
+{% extends 'layout.twig' %}
+
+{% block title %}Créer une alerte{% endblock %}
+
 {% block content %}
 
 <main class="container">
-    <!-- Example row of columns -->
     <div class="row">
         <div class="col-md-12">
-        {% for message in app.session.getFlashBag.get('message') %}
-        <div class="alert alert-dismissable alert-warning">
-    {{ message }}
-    </div>
-{% endfor %}
             <h2>Creation crise</h2>
 				<form action="#" method="post">
 				    {{ form_widget(form) }}
-
 				    <input type="submit" name="submit" />
 				</form>
         </div>
     </div>
 </main>
+
+    <div id="main-body" class="col-md-10">
+        
+        <h2>Alerter le public</h2>
+        
+        <form class="form-horizontal">
+
+{% for message in app.session.getFlashBag.get('message') %}
+    <div class="alert alert-dismissable alert-warning">
+        {{ message }}
+    </div>
+{% endfor %}
+
+            <fieldset>
+                <legend>Contenu</legend>
+                <div class="form-group">
+                  <label for="inputTitle" class="col-lg-2 control-label">Titre</label>
+                  <div class="col-lg-10">
+                    <input class="form-control" id="inputTitle" type="text">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="message" class="col-lg-2 control-label">Message</label>
+                  <div class="col-lg-10">
+                    <textarea class="form-control" rows="3" id="message"></textarea>
+                    <span class="help-block">Un message décrivant la crise. <strong>Ce message sera déployé sur les réseaux sociaux</strong></span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="crisisType" class="col-lg-2 control-label">Type</label>
+                  <div class="col-lg-10">
+                    <select class="form-control" id="crisisType" name="crisisType">
+                      <option value="natural">Catastrophe naturelle</option>
+                      <option value="zombies">Attaque de zombies</option>
+                      <option value="terrorAttack">Attentat</option>
+                      <option value="kidnapping">Enlèvement</option>
+                      <option value="gogole">Au gogole</option>
+                    </select>
+                  </div>
+                </div>
+            </fieldset>
+            
+            <fieldset>
+                <legend>Destinations</legend>
+                
+                <div class="form-group" id="destinations-boxes">
+                      <label class="col-lg-2 control-label">Réseaux sociaux</label>
+                      <div class="col-lg-10">
+                        <div class="checkbox">
+                          <label>
+                            <input type="checkbox" name="socialNetwork" value="twitter"> <span><i class="fa fa-twitter"></i> Twitter</span>
+                          </label>
+                        </div>
+                        <div class="checkbox">
+                          <label>
+                            <input type="checkbox" name="socialNetwork" value="facebook"> <span><i class="fa fa-facebook"></i> Facebook</span>
+                          </label>
+                        </div>
+                        <div class="checkbox">
+                          <label>
+                            <input type="checkbox" name="socialNetwork" value="instagram"> <span><i class="fa fa-instagram"></i> Instagram</span>
+                          </label>
+                        </div>
+                      </div>
+                      
+                      <label class="col-lg-2 control-label">Médias</label>
+                      <div class="col-lg-10">
+                        <div class="checkbox">
+                          <label>
+                            <input type="checkbox" name="medias" value="tv"> <span><i class="fa fa-television"></i> Télévision</span>
+                          </label>
+                        </div>
+                        <div class="checkbox">
+                          <label>
+                            <input type="checkbox" name="medias" value="radio"> <span><i class="fa fa-mixcloud"></i> Radio</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </fieldset>
+          
+            <div class="form-group">
+              <div class="col-lg-10 col-lg-offset-2">
+                <button type="reset" class="btn btn-default">Annuler</button>
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#validationModal">Valider</button>
+                <button type="submit" style="visibility:hidden;" id="submitMainForm"></button>
+              </div>
+            </div>
+        </form>
+    
+    </div>
+
 {% endblock %}

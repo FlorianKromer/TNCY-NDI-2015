@@ -167,7 +167,7 @@ textarea {
 
 
 .navbar-collapse{
-    margin-top: 3%;
+    margin-top: 2%;
 }
 #map { height: 500px; }
 
@@ -587,4 +587,13 @@ span[data-tip]{
     h3 {
         page-break-after: avoid;
     }
+}
+
+.link-brand {
+    color: #ffffff;
+    font: normal 60px 'Cookie', cursive;
+    margin: 0;
+}
+.link-brand span {
+    color: #5383d3;
 }

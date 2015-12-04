@@ -1,41 +1,34 @@
-{% extends 'V2/layout.twig' %}
-{% block bodyattributes %}
-    {{ parent() }}
-    class="fullpage"
-{% endblock bodyattributes %}
+{% extends 'layout.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
 {% block content %}
 <main role="main" class="main">
-    <div class="container">
-        <!-- Example row of columns -->
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <div class="fullpage__title">
-                    <h2> Listes des alertes en cours</h2>
-                    <br>
-                    <div id="map-canvas" class="text-center" > 
-                      <span style="VISIBILITY:hidden;display:none">
-                      </span>
-                    </div>
-                </div>
-
-
-            </div>
-
-        </div>       
-    </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <div class="fullpage__title">
+          <h2>Listes des alertes en cours</h2>
+          <br>
+          <div id="map-canvas" class="text-center" > 
+            <span style="VISIBILITY:hidden;display:none"></span>
+          </div>
+        </div>
+      </div>
+    </div>       
+  </div>
 </main>
-{% endblock %}
-{% block footer %}
-    
 {% endblock %}
 
 {% block javascripts %}  
   <script>
+
   var liste_crise=[];
+
   {% for crise in crises %}
       var tmp ={id:{{crise.idCrise}}, lat:{{crise.latitude}}, lng:{{crise.longitude}} , nom:"{{crise.titre}}" , rayon: {{crise.rayon}}};
       liste_crise.push( tmp );
   {% endfor %}
+
   </script>
-  {{ parent() }}
 {% endblock %}

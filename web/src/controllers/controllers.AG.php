@@ -104,7 +104,7 @@ $app->match('/Inscription', function (Request $request) use ($app) {
 $app->get('/crise/{name}/{id}', function ($name,$id) use ($app) {
 	// do something with the data
 		
-		$sql = "SELECT * FROM Crise WHERE idCrise = ?";
+		$sql = "SELECT * FROM Crise INNER JOIN Etat WHERE Crise.idEtat = Etat.idEtat AND idCrise = ?";
 		$crise = $app['db']->fetchAssoc($sql, array((int)$id));
 	
     return $app['twig']->render(VERSION.'detail.twig', array("crise"=>$crise));
