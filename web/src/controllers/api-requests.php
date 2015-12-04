@@ -34,3 +34,9 @@ $app->get('/facebook', function () use ($app) {
     return $app['twig']->render(VERSION.'api-requests.twig', array());
 
 })->bind('API');
+
+$app->get('/visibilty', function () use ($app) {
+
+	    return $app['twig']->render(VERSION.'visibilty.twig', array());
+
+})->bind('visibilty');

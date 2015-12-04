@@ -1,0 +1,33 @@
+{% extends 'layout.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block content %}
+<main role="main" class="main">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <div class="fullpage__title">
+          <h2>Listes des alertes en cours</h2>
+          <br>
+          {% for crise in crises %}
+            <div class="list-group">
+  <a href="{{path('Info', { 'name': crise.name,'id': crise.id })}}" class="list-group-item active">
+    <h4 class="list-group-item-heading">{{crise.titre}}</h4>
+    <p class="list-group-item-text">{{crise.description}}</p>
+  </a>
+</div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>       
+  </div>
+</main>
+{% endblock %}
+
+{% block javascripts %}  
+  <script>
+
+
+  </script>
+{% endblock %}
