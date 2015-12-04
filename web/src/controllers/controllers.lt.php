@@ -14,8 +14,8 @@ $app->match('/creation_crise', function (Request $request) use ($app) {
 		'titre' => 'Titre de la crise',
         'type' => 'Type de crise',
         'description' => 'Description de la crise',
-		'message' => 'Message à faire passer ',
-		'date' => 'Date début crise JJ/MM/YYYY',
+		
+		'date' => 'Date début crise YYYY-MM-DD',
 		'latitude' => 'latitude du lieu de crise',
 		'longitude' => 'longitude du lieu de crise'
     );
@@ -24,7 +24,7 @@ $app->match('/creation_crise', function (Request $request) use ($app) {
         ->add('name')
 		->add('titre')
 		->add('type')
-		->add('message','textarea')
+		->add('description','textarea')
 		->add('date')
 		->add('longitude')
 		->add('latitude')
@@ -41,19 +41,25 @@ $app->match('/creation_crise', function (Request $request) use ($app) {
 		$data["name"];
 		var_dump($data);
 		
-		die();
+		//die();
         // do something with the data
 		$app['session']->getFlashBag()->add('message', 'Merci pour votre message '.$data["name"]);
 		
 		//todo : insertion dans la base de données
-		$sql = "Insert INTO ";
+	
+		$temp = "Select idGrandActeur from GrandActeur where nomGrandActeur= ?";
+		$posttemp = $app['db']->fetchAssoc($temp, array( $data["name"]));
+		
+		$sql = "INSERT INTO Crise (titre, description, latitude,longitude,rayon,dateDebut,dateFin,idEtat,idAuteur) VALUE (?,?,?,?,200,?,null,1,?)";
+		
+		$post = $app['db']->executeUpdate($sql, array( $data["titre"], $data["description"], $data["latitude"],$data["longitude"],$data["date"],$posttemp['idGrandActeur']));
 		
         // redirect somewhere
-        return $app->redirect('contact',301);
+        return $app->redirect('creation_crise',301);
     }
 
     // display the form
     return $app['twig']->render(VERSION.'creation_crise.twig', array('form' => $form->createView()));
 })
-->bind('Contact');
+->bind('creation_crise');
 
