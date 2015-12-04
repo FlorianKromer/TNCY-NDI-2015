@@ -599,14 +599,11 @@ span[data-tip]{
 }
 
 .form_title{
-    float: right;
-    clear: left;
+    text-align: right;
 }
 
 .form_content{
     float: left;
-    clear: right;
-
 }
 
 .form_submit{
