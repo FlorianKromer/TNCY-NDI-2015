@@ -72,12 +72,8 @@ $app->match('/Inscription', function (Request $request) use ($app) {
 		->add('mdp2', 'password', array(
         'attr' => array('placeholder' => 'mot de passe','class'=>''),
         'label' => 'Confirmer mot de passe'))
-		/*->add('categ', 'text', array(
-        'attr' => array('placeholder' => 'categorie','class'=>''),
-        'label' => 'Categorie: '))*/
-        ->add('categ', 'choice', array(
+        ->add('categorie', 'choice', array(
             'choices' => $categories,
-            'expanded' => true,
         ))
 
         ->getForm();
@@ -92,7 +88,7 @@ $app->match('/Inscription', function (Request $request) use ($app) {
 		}
 		else {
 		$sql = "INSERT INTO GrandActeur (nomGrandActeur, mdpGrandActeur, idCateg) VALUE (?,?,?);";
-		$post = $app['db']->executeUpdate($sql, array( $data["name"], sha1($data["mdp"]), $data['categ']));
+		$post = $app['db']->executeUpdate($sql, array( $data["name"], sha1($data["mdp"]), $data['categorie']));
 	
 		$app['session']->getFlashBag()->add('message', 'Inscription réussit');
 		}
