@@ -10,6 +10,9 @@
 
 .navbar {
 	margin-bottom: 0;
+    height: 100px;
+    vertical-align: middle;
+    text-align: center;
 }
 
 #map { height: 500px; }
