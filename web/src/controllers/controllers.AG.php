@@ -18,10 +18,10 @@ $app->match('/Connexion', function (Request $request) use ($app) {
 
     $form = $app['form.factory']->createBuilder('form', $data)
         ->add('name', 'text', array(
-        'attr' => array('placeholder' => 'nom','class'=>''),
+        'attr' => array('placeholder' => 'nom','class'=>'form-control'),
         'label' => 'Nom: '))
         ->add('mdp', 'password', array(
-        'attr' => array('placeholder' => 'mot de passe','class'=>''),
+        'attr' => array('placeholder' => 'mot de passe','class'=>'form-control'),
         'label' => 'Mot de passe: '))
         
         ->getForm();
@@ -65,16 +65,16 @@ $app->match('/Inscription', function (Request $request) use ($app) {
 
     $form = $app['form.factory']->createBuilder('form', $data)
         ->add('name', 'text', array(
-        'attr' => array('placeholder' => 'nom','class'=>''),
+        'attr' => array('placeholder' => 'nom','class'=>'form-control'),
         'label' => 'Nom: '))
         ->add('mdp', 'password', array(
-        'attr' => array('placeholder' => 'mot de passe','class'=>''),
+        'attr' => array('placeholder' => 'mot de passe','class'=>'form-control'),
         'label' => 'Mot de passe: '))
 		->add('mdp2', 'password', array(
-        'attr' => array('placeholder' => 'mot de passe','class'=>''),
+        'attr' => array('placeholder' => 'mot de passe','class'=>'form-control'),
         'label' => 'Confirmer mot de passe'))
         ->add('categorie', 'choice', array(
-            'choices' => $categories,
+            'choices' => $categories
         ))
 
         ->getForm();
@@ -105,7 +105,7 @@ $app->match('/Inscription', function (Request $request) use ($app) {
 $app->get('/crise/{name}/{id}', function ($name,$id) use ($app) {
 	// do something with the data
 		
-		$sql = "SELECT * FROM Crise WHERE idCrise = ?";
+		$sql = "SELECT * FROM Crise INNER JOIN Etat WHERE Crise.idEtat = Etat.idEtat AND idCrise = ?";
 		$crise = $app['db']->fetchAssoc($sql, array((int)$id));
 	
     return $app['twig']->render(VERSION.'detail.twig', array("crise"=>$crise));

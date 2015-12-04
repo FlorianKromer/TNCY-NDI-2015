@@ -5,7 +5,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 
-
 //Acceuil
 $app->get('/', function () use ($app) {
     $sql = "SELECT * FROM Crise";
@@ -17,5 +16,6 @@ $app->get('/', function () use ($app) {
 })->bind('Accueil');
 
 $app->error(function (\Exception $e, $code) use ($app) {
+	//var_dump($app->requestUri);
     return $app['twig']->render(VERSION.'error.twig', array('code' => $code));
 });

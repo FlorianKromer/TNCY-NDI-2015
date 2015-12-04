@@ -1,0 +1,29 @@
+database:
+    driver: pdo_mysql
+    host: 000
+    dbname: 000
+    user: 00
+    password: 000
+    charset: utf8
+
+swiftmailer:
+    transport:            smtp
+    username:             toto@gmail.com
+    password:             azerty
+    host:                 smtp.gmail.com
+    port:                 465
+    encryption:           ssl
+
+general:
+    destinataire: toto@gmail.com
+
+oauth:
+    facebook_api_key: 00000000
+    facebook_api_key: 00000000
+    facebook_api_secret: 00000000
+    twitter_api_key: 00000000
+    twitter_api_secret: 00000000
+    google_api_key: 00000000
+    google_api_secret: 00000000
+    github_api_key: 00000000
+    github_api_secret: 00000000
