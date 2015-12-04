@@ -3,6 +3,7 @@
 use Silex\Provider\FormServiceProvider;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Abraham\TwitterOAuth\TwitterOAuth;
 
 
 $app->get('/', function () use ($app) {
@@ -110,6 +111,17 @@ $app->get('/crise/{name}/{id}', function ($name,$id) use ($app) {
     return $app['twig']->render(VERSION.'detail.twig', array("crise"=>$crise));
 })->bind('Info');
 
+$app->get('/twitter/{id}', function ($id) use ($app) {
+//	$connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token, $access_token_secret);
+
+	$sql = "SELECT * FROM Crise WHERE idCrise = ?;";
+		 
+	$post = $app['db']->fetchAssoc($sql, array($id));
+	$connection = new TwitterOAuth('OObJjAyLBXmPRwZQtEPKuUQJj', 'vY1ucf50h5A42EzRF9B99rMphZAnnJOZeqQzTo0PH06gLQYNzL', '870220712-I91vO8gJ2qf0yvzMdop8pYK4WdAM0L3varQP692v', 'oZ0u9VGNj5faHS6BPoa6gKXXohnufkCsR5ngzKVb21ufJ');
+	$content = $connection->get("account/verify_credentials");
+	//$connection->post("statuses/update", array("status" => 'CACAAAAA'));
+	return $app['twig']->render(VERSION.'twitter.twig', array("crise"=>$post,"message"=>$post["titre"]));
+})->bind('Twitter');
 
 /*
 //ETAPE 1 : une route

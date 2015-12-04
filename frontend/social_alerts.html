@@ -116,20 +116,20 @@
 				<div class="form-group">
 				  <label for="inputTitle" class="col-lg-2 control-label">Titre</label>
 				  <div class="col-lg-10">
-					<input class="form-control" id="inputTitle" type="text">
+					<input class="form-control" id="inputTitle" type="text" required>
 				  </div>
 				</div>
 				<div class="form-group">
 				  <label for="message" class="col-lg-2 control-label">Message</label>
 				  <div class="col-lg-10">
-					<textarea class="form-control" rows="3" id="message"></textarea>
+					<textarea class="form-control" rows="3" id="message" required></textarea>
 					<span class="help-block">Un message décrivant la crise. <strong>Ce message sera déployé sur les réseaux sociaux</strong></span>
 				  </div>
 				</div>
 				<div class="form-group">
 				  <label for="crisisType" class="col-lg-2 control-label">Type</label>
 				  <div class="col-lg-10">
-					<select class="form-control" id="crisisType" name="crisisType">
+					<select class="form-control" id="crisisType" name="crisisType" required>
 					  <option value="natural">Catastrophe naturelle</option>
 					  <option value="zombies">Attaque de zombies</option>
 					  <option value="terrorAttack">Attentat</option>
@@ -183,7 +183,7 @@
 			<div class="form-group">
 			  <div class="col-lg-10 col-lg-offset-2">
 				<button type="reset" class="btn btn-default">Annuler</button>
-				<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#validationModal">Valider</button>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#validationModal" id="user-valid-button" disabled>Valider</button>
 				<button type="submit" style="visibility:hidden;" id="submitMainForm"></button>
 			  </div>
 			</div>
@@ -294,6 +294,14 @@
 	    
 	    
 <script>
+		$('#inputTitle, #message').keyup(function() {
+			checkForm();
+		});
+		
+		$('input[type=checkbox]').click(function() {
+			checkForm();
+		});
+	
 		$("#validationModal").on("shown.bs.modal", function() { 
 			var title = $('#inputTitle').val();
 			var message = $('#message').val();
@@ -316,6 +324,36 @@
 			$(this).find('.alert-message').empty();
 			$(this).find('.alert-medias').empty();
 		});
+		
+		function checkForm() {
+			valid = true;
+			someLength = ['#inputTitle', '#message'];
+			for (var i = 0 ; i < someLength.length ; i++) {
+				var value = $(someLength[i]).val();
+				console.log(value);
+				if (value == undefined || value.length == 0) {
+					valid = false;
+					break;
+				}
+			}
+			
+			if (valid) {
+				valid = false;
+				$('input[type=checkbox]').each(function() {
+					if ($(this).is(':checked')) {
+						valid = true;
+						return false;
+					}
+				});	
+			}
+			
+			if (valid) {
+				$('#user-valid-button').prop('disabled', false);
+			}
+			else {
+				$('#user-valid-button').prop('disabled', true);
+			}
+		};
 
 		function submitMainForm() {
 			$('#submitMainForm').click();

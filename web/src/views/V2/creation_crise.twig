@@ -4,14 +4,57 @@
 
 {% block content %}
 
+<style>
+    .controls {
+  margin-top: 10px;
+  border: 1px solid transparent;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 32px;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 300px;
+}
+
+#pac-input:focus {
+  border-color: #4d90fe;
+}
+
+.pac-container {
+  font-family: Roboto;
+}
+</style>
+
 <main class="container">
     <div class="row">
         <div class="col-md-12">
+        <div class="col-md-4">
+        {% for message in app.session.getFlashBag.get('message') %}
+        <div class="alert alert-dismissable alert-warning">
+    {{ message }}
+        </div>
+        {% endfor %}
             <h2>Creation crise</h2>
 				<form action="#" method="post">
 				    {{ form_widget(form) }}
 				    <input type="submit" name="submit" />
 				</form>
+        </div>
+        <div class="col-md-8">
+
+            <div id="map-canvas" class="text-center" > </div>
+            <input id="pac-input" class="controls" type="text" placeholder="Search Box">
         </div>
     </div>
 </main>
