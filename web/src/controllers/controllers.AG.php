@@ -46,7 +46,7 @@ $app->match('/Connexion', function (Request $request) use ($app) {
     }
 
     // display the form
-    return $app['twig']->render(VERSION.'Connexion.twig', array('form' => $form->createView()));
+    return $app['twig']->render(VERSION.'connexion.twig', array('form' => $form->createView()));
 })
 ->bind('Connexion');
 
