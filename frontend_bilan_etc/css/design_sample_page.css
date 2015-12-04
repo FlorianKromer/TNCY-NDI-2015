@@ -1,0 +1,30 @@
+.news{
+	height: auto;
+	min-height: 150px;
+	text-align: center;
+	font-size: 3em;
+	padding: 5px 0px;
+	vertical-align: middle;
+}
+
+.natural-disaster{
+	background-image: url("../img/pluie.jpg");
+	color: white;
+	background-color: green;
+	background-repeat: no-repeat;
+}
+
+.medical-disaster{
+	background-image: url("../img/HIV-infection.jpg");
+	color: white;
+	background-color: blue;
+	background-repeat: no-repeat;
+}
+
+.ALCOOOOOOOOL-disaster{
+	background-image: url("../img/vin.jpg");
+	color: white;
+	background-color: grey;
+	background-repeat: no-repeat;
+	background-position: center;
+}

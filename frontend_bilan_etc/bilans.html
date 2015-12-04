@@ -1,0 +1,394 @@
+	<!DOCTYPE html>
+	<html lang="en">
+	  <head>
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	    <title>Alerte Tsunami - FeelSecure</title>
+	
+	    <!-- Bootstrap -->
+	    <link href="css/bootstrap.min.css" rel="stylesheet">
+	    <!-- Custom -->
+	    <link href="css/custom.css" rel="stylesheet">
+	    <!-- Styles -->
+	    <link href="css/styles.css" rel="stylesheet">
+	    <link href="css/custom_chart.css" rel="stylesheet">
+	    
+	    <!-- Leaflet -->
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+		<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+		<link href="css/animate.min.css" rel="stylesheet">
+	    
+	    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+
+		<link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
+		
+
+		<!-- Custom styling plus plugins -->
+		<link href="css/icheck/flat/green.css" rel="stylesheet">
+	
+	    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	    <!--[if lt IE 9]>
+	      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	    <![endif]-->
+	  </head>
+	  <body>
+		  
+	<!-- Début de la barre de navigation -->
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="#">FeelSecure</a>
+	    </div>
+	
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav">
+	        <li class="active"><a href="#">Accueil <span class="sr-only">(current)</span></a></li>
+	        <li><a href="#">Tableau de bord</a></li>
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Définir une alerte <span class="caret"></span></a>
+	          <ul class="dropdown-menu" role="menu">
+	            <li><a href="#">Catastrophe naturelle</a></li>
+	            <li><a href="#">Attentat</a></li>
+	            <li><a href="#">#JeSuisCharlie</a></li>
+	            <li class="divider"></li>
+	            <li><a href="#">Canicule</a></li>
+	            <li class="divider"></li>
+	            <li><a href="#">Enlèvement</a></li>
+	            <li><a href="#">Gogole</a></li>
+	          </ul>
+	        </li>
+	      </ul>
+	      <form class="navbar-form navbar-left" role="search">
+	        <div class="form-group">
+	          <input class="form-control" placeholder="Search" type="text">
+	        </div>
+	        <button type="submit" class="btn btn-default">Submit</button>
+	      </form>
+	      <ul class="nav navbar-nav navbar-right">
+	        <li><a href="#">Link</a></li>
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
+	<!-- Fin de la barre de navigation -->
+
+	<!-- Menu de gauche -->
+	<div id="main-left-panel" class="col-md-2 navigation">
+		<div class="panel panel-warning">
+		  <div class="panel-heading">
+			<h3 class="panel-title">Statut de l'alerte</h3>
+		  </div>
+		  <div class="panel-body">
+		       En cours de gestion	   
+		  </div>
+		</div>
+		
+		<div class="list-group">
+		  <a href="alert_page.html" class="list-group-item active">
+			Vue d'ensemble
+		  </a>
+		  <a href="#" class="list-group-item">Éditer les caractéristiques
+		  </a>
+		  <a href="#" class="list-group-item">Alerter les réseaux sociaux
+		  </a>
+		  <a href="#" class="list-group-item">Contrôle de visibilité
+		  </a>
+		  <a href="#" class="list-group-item">Bilans
+		  </a>
+		</div>
+	</div>
+	<!-- Fin menu de gauche -->
+	
+	<!-- Corps -->
+	
+	<div id="main-body" class="col-md-10">
+		
+		<h2>Bilan de la situation</h2>
+		<br/><br>
+		
+		<div class="row">
+			<div class="col-lg-4">
+				<div id="moncercle">
+					<br><br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="circle_text_1">153</span>	
+				</div>
+				<h2>Nombre de victimes</h2>
+				<p>Etat actuel du bilan humain de la situation. Pour une évolution précises des informations consulter le graphe détaillé.</p>
+			</div>
+			<div class="col-lg-4">
+				<div id="moncercle">
+					<br><br><br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="circle_text_2">13/11/2015</span>	
+				</div>
+				<h2>Date de la crise</h2>
+				<p>Jour au cours duquel a été déclenché la crise.</p>
+			</div>
+			<div class="col-lg-4">
+				<div id="moncercle">
+					<br><br><br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="circle_text_3">Forte</span>	
+				</div>
+				<h2>Gravité de la crise</h2>
+				<p>Evaluation de la gravité de la crise selon des critères spécifiques (Faible, Modérée, Importante, Forte)</p>
+			</div>
+        </div>
+        
+        <br><br><br>
+		
+		<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+		<i id="change_values" style="cursor:pointer;" class="fa fa-wrench x2"></i>
+
+		
+	<br><br>
+	
+	<form id="to-toggle" data-visibility="hidden" class="form-horizontal">
+	  <fieldset>
+		<legend>Modification des données</legend>
+		
+		<div class="form-group">
+			
+		  
+		  <div class="col-lg-3">
+			<label for="inputPassword" class="col-lg-2 control-label">Abscisse</label>
+		  </div>
+		  <div class="col-lg-3">
+			<label for="inputPassword" class="control-label">Ordonnée</label>
+		  </div>
+		</div>
+		
+		<div class="form-group">
+			<div class="col-lg-6">
+				<div id="custom-char-container">
+				</div>
+				<button type="button" class="btn btn-default" id="add-char-button">Ajouter une caractéristique</button>
+			</div>
+			<div class="col-lg-6">
+				<div id="custom-char-container">
+				</div>
+				<button type="button" class="btn btn-default" id="modify">Mettre à jour</button>
+			</div>
+		</div>
+		
+	  </fieldset>
+	</form>
+	
+	</div>
+	
+	<!-- Fin corps -->
+	
+	<!--  Footer -->
+	<footer class="footer-distributed col-md-12">
+
+			<div class="footer-left">
+
+				<h3>Feel<span>Secure</span></h3>
+				<img id="logo_racoon" src="img/logoRacoon.png"/>
+
+				<p class="footer-links">
+					<a href="#">Home</a>
+					·
+					<a href="#">Blog</a>
+					·
+					<a href="#">Pricing</a>
+					·
+					<a href="#">About</a>
+					·
+					<a href="#">Faq</a>
+					·
+					<a href="#">Contact</a>
+				</p>
+
+				<p class="footer-company-name">Les Papuches 2015</p>
+			</div>
+
+			<div class="footer-center">
+
+				<div>
+					<i class="fa fa-map-marker"></i>
+					<p><span>193 Avenue Paul Muller</span> Villers-Lès-Nancy, France</p>
+				</div>
+
+				<div>
+					<i class="fa fa-phone"></i>
+					<p>(+33)6 12 34 56 78</p>
+				</div>
+
+				<div>
+					<i class="fa fa-envelope"></i>
+					<p><a href="mailto:support@company.com">support@lespapuches.com</a></p>
+				</div>
+
+			</div>
+
+			<div class="footer-right">
+
+				<p class="footer-company-about">
+					<span>A propos</span>
+					Nous oeuvrons dans un objectif de sécurisation des victimes de catastrophes.
+				</p>
+
+				<div class="footer-icons">
+
+					<a href="https://www.facebook.com/NuitInfoTNCY/?fref=ts"><i class="fa fa-facebook"></i></a>
+					<a href="#"><i class="fa fa-twitter"></i></a>
+					<a href="#"><i class="fa fa-linkedin"></i></a>
+					<a href="#"><i class="fa fa-github"></i></a>
+
+				</div>
+
+			</div>
+
+		</footer>
+	<!-- Fin footer -->
+	
+	<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="js/jquery.canvasjs.min.js"></script>
+	
+	<script type="text/javascript">
+	
+		var addCharButton = $('#add-char-button');
+		var customCharContainer = $('#custom-char-container');
+
+		var newCharTemplate = '<div class="form-group" style="display:inline;"> \
+							  <div> \
+								<input class="col-lg-1 form-control new-char first" id="inputEmail"> \
+							  </div> \
+							  <div> \
+								<input style="margin-left:10px;" class="col-lg-1 form-control new-char second" id="inputEmail"> \
+							  </div> \
+							  &nbsp;&nbsp;&nbsp;<i class="fa fa-times new-char-remove"></i> \
+							</div>';
+
+		addCharButton.click(function() {
+			customCharContainer.prepend(newCharTemplate);
+			renumerate();
+		});
+
+		function removeCustomChar(index) {
+			customCharContainer.children().get(index).remove();
+			renumerate();
+		};
+
+		function renumerate() {
+			customCharContainer.children().each(function(index, element) {
+				$(element).find('label').attr('for', 'new-char-'+index);
+				$(element).find('input').attr('id', 'new-char-'+index);
+				$(element).find('name').attr('name', 'new-char-'+index);
+				$(element).find('.new-char-remove').attr('onclick', 'removeCustomChar('+index+');');
+			});	
+		}
+	
+	</script>
+	
+	<script type="text/javascript">
+		
+	$('document').ready(function() {
+		$('#to-toggle').hide();
+		
+	});
+	
+	$(function () {
+		//Better to construct options first and then pass it as a parameter
+		var options = {
+			title: {
+				text: "Evolution du nombre de victimes"
+			},
+					animationEnabled: true,
+			data: [
+			{
+				type: "spline", //change it to line, area, column, pie, etc
+				dataPoints: [
+					{ x: new Date(2014,05,01), y: 10 },
+					{ x: new Date(2014,05,05), y: 32 },
+					{ x: new Date(2014,05,08), y: 78 },
+					{ x: new Date(2014,05,12), y: 83 },
+				]
+			}
+			]
+		};
+
+		$("#chartContainer").CanvasJSChart(options);
+
+	});
+	
+	/*
+	$("#change_values").click(function() {
+		options = {
+			title: {
+				text: "Evolution du nombre de victimes"
+			},
+					animationEnabled: true,
+			data: [
+			{
+				type: "spline", //change it to line, area, column, pie, etc
+				dataPoints: [
+					{ x: new Date(2014,05,01), y: 60 },
+					{ x: new Date(2014,05,05), y: 32 },
+					{ x: new Date(2014,05,08), y: 78 },
+					{ x: new Date(2014,05,12), y: 83 },
+				]
+			}
+			]
+		};
+		
+		$("#chartContainer").CanvasJSChart(options);
+	});
+	*/
+	
+	$("#change_values").click(function() {
+		if ($('#to-toggle').attr("data-visibility") == "hidden") {
+			$('#to-toggle').show();
+			$('#to-toggle').attr("data-visibility", "visible");
+		} else {
+			$('#to-toggle').hide();
+			$('#to-toggle').attr("data-visibility", "hidden");
+		}
+	});
+	
+	$("#modify").click(function() {
+		
+		var data_set = [];
+		
+		customCharContainer.children().each(function(index, element) {
+			$(element).find('label').attr('for', 'new-char-'+index);
+			$(element).find('input').attr('id', 'new-char-'+index);
+			$(element).find('name').attr('name', 'new-char-'+index);
+			$(element).find('.new-char-remove').attr('onclick', 'removeCustomChar('+index+');');
+			temp = parseInt($(element).find('input.first').val());
+			temp_bis = parseInt($(element).find('input.second').val());
+			
+			data_set.push({ x: temp, y: temp_bis});
+		});
+		
+		options = {
+			title: {
+				text: "Evolution du nombre de victimes"
+			},
+					animationEnabled: true,
+			data: [
+			{
+				type: "spline", //change it to line, area, column, pie, etc
+				dataPoints: data_set
+			}
+			]
+		};
+		
+		$("#chartContainer").CanvasJSChart(options);
+	});
+	
+	
+	</script>
+</body>
+	</html>
+	
+	
