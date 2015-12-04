@@ -10,7 +10,7 @@ $app->get('/', function () use ($app) {
 })
 ->bind('Accueil');
 
-
+// connexion
 $app->match('/Connexion', function (Request $request) use ($app) {
     // some default data for when the form is displayed the first time
     $data = array();
@@ -31,11 +31,11 @@ $app->match('/Connexion', function (Request $request) use ($app) {
         $data = $form->getData();
         // do something with the data
 		
-		 $sql = "SELECT * FROM GrandActeur WHERE nomGrandActeur = '?' AND mdpGrandActeur = '?';";
+		$sql = "SELECT * FROM GrandActeur WHERE nomGrandActeur = '?' AND mdpGrandActeur = '?';";
 		 
 		$post = $app['db']->fetchAssoc($sql, array( $data["name"], sha1($data["mdp"])));
-		
-		$app['session']->getFlashBag()->add('message', 'nom: '.$data["name"].', mot de passe: '.sha1($data["mdp"]));
+        
+        $app['session']->getFlashBag()->add('message', 'nom: '.$data["name"].', mot de passe: '.sha1($data["mdp"]));
         // redirect somewhere
         return $app->redirect('Connexion',301);
     }
@@ -45,11 +45,18 @@ $app->match('/Connexion', function (Request $request) use ($app) {
 })
 ->bind('Connexion');
 
-/////
+// inscription
 $app->match('/Inscription', function (Request $request) use ($app) {
    // some default data for when the form is displayed the first time
     $data = array();
 //user mdp mdp2 idcateg
+    $requete = "Select * from Categorie;";
+    $res = $app['db']->fetchAll($requete);
+    $categories = array();
+    foreach ($res as $key => $value) {
+        $categories[$value['idCateg']] = $value['libelle'];
+    }
+
     $form = $app['form.factory']->createBuilder('form', $data)
         ->add('name', 'text', array(
         'attr' => array('placeholder' => 'nom','class'=>''),
@@ -60,10 +67,14 @@ $app->match('/Inscription', function (Request $request) use ($app) {
 		->add('mdp2', 'password', array(
         'attr' => array('placeholder' => 'mot de passe','class'=>''),
         'label' => 'Confirmer mot de passe'))
-		->add('categ', 'text', array(
+		/*->add('categ', 'text', array(
         'attr' => array('placeholder' => 'categorie','class'=>''),
-        'label' => 'Categorie: '))
-        
+        'label' => 'Categorie: '))*/
+        ->add('categ', 'choice', array(
+            'choices' => $categories,
+            'expanded' => true,
+        ))
+
         ->getForm();
 
     $form->handleRequest($request);
@@ -76,8 +87,7 @@ $app->match('/Inscription', function (Request $request) use ($app) {
 		}
 		else {
 		$sql = "INSERT INTO GrandActeur (nomGrandActeur, mdpGrandActeur, idCateg) VALUE (?,?,?);";
-		 
-		$post = $app['db']->executeUpdate($sql, array( $data["name"], sha1($data["mdp"]), (INT)$data["categ"]));
+		$post = $app['db']->executeUpdate($sql, array( $data["name"], sha1($data["mdp"]), $data['categ']));
 	
 		$app['session']->getFlashBag()->add('message', 'nom: '.$data["name"].', mot de passe: '.sha1($data["mdp"].', categorie: '.$data["categ"]));
 		}
