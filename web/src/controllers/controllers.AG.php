@@ -31,11 +31,16 @@ $app->match('/Connexion', function (Request $request) use ($app) {
         $data = $form->getData();
         // do something with the data
 		
-		$sql = "SELECT * FROM GrandActeur WHERE nomGrandActeur = '?' AND mdpGrandActeur = '?';";
+		
+		$sql = "SELECT * FROM GrandActeur WHERE nomGrandActeur = ? AND mdpGrandActeur = ?;";
 		 
 		$post = $app['db']->fetchAssoc($sql, array( $data["name"], sha1($data["mdp"])));
-        
-        $app['session']->getFlashBag()->add('message', 'nom: '.$data["name"].', mot de passe: '.sha1($data["mdp"]));
+		if ($post){
+		$app['session']->getFlashBag()->add('message', 'Connexion réussit');
+		}		
+		else {
+		$app['session']->getFlashBag()->add('message', 'Connexion échec');
+		}
         // redirect somewhere
         return $app->redirect('Connexion',301);
     }
@@ -89,7 +94,7 @@ $app->match('/Inscription', function (Request $request) use ($app) {
 		$sql = "INSERT INTO GrandActeur (nomGrandActeur, mdpGrandActeur, idCateg) VALUE (?,?,?);";
 		$post = $app['db']->executeUpdate($sql, array( $data["name"], sha1($data["mdp"]), $data['categ']));
 	
-		$app['session']->getFlashBag()->add('message', 'nom: '.$data["name"].', mot de passe: '.sha1($data["mdp"].', categorie: '.$data["categ"]));
+		$app['session']->getFlashBag()->add('message', 'Inscription réussit');
 		}
         // redirect somewhere
         return $app->redirect('Inscription',301);
