@@ -26,5 +26,6 @@
         "gigablah/silex-oauth": "^1.3",
         "ziadoz/silex-capsule": "1.*",
         "abraham/twitteroauth": "^0.6.2"
+        "facebook/php-sdk-v4" : "~5.0"
     }
 }

@@ -119,7 +119,7 @@ $app->get('/twitter/{id}', function ($id) use ($app) {
 	$post = $app['db']->fetchAssoc($sql, array($id));
 	$connection = new TwitterOAuth('OObJjAyLBXmPRwZQtEPKuUQJj', 'vY1ucf50h5A42EzRF9B99rMphZAnnJOZeqQzTo0PH06gLQYNzL', '870220712-I91vO8gJ2qf0yvzMdop8pYK4WdAM0L3varQP692v', 'oZ0u9VGNj5faHS6BPoa6gKXXohnufkCsR5ngzKVb21ufJ');
 	$content = $connection->get("account/verify_credentials");
-	$connection->post("statuses/update", array("status" => 'CACAAAAA'));
+	//$connection->post("statuses/update", array("status" => 'CACAAAAA'));
 	return $app['twig']->render(VERSION.'twitter.twig', array("crise"=>$post,"message"=>$post["titre"]));
 })->bind('Twitter');
 

@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <div class="fullpage__title">
-                    <h2> Venez découvrir tous nos projets</h2>
+                    <h2> Listes des alertes en cours</h2>
                     <br>
                     <div id="map-canvas" class="text-center" > 
                       <span style="VISIBILITY:hidden;display:none">
@@ -38,4 +38,10 @@
   {% endfor %}
   </script>
   {{ parent() }}
+
+
+  <!-- Maps -->
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
+  <script src="{{ asset('/js/maps.js') }}"></script>
+
 {% endblock %}
