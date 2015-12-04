@@ -16,3 +16,6 @@ $app->get('/', function () use ($app) {
 
 })->bind('Accueil');
 
+$app->error(function (\Exception $e, $code) use ($app) {
+    return $app['twig']->render(VERSION.'error.twig', array('code' => $code));
+});
