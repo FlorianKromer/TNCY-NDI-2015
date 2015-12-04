@@ -69,8 +69,6 @@
 			</div>
 
 			<div id="map-canvas" class="text-center" > 
-				<span style="VISIBILITY:hidden;display:none">
-				</span>
 			</div>	</div>
 
 		</main>
@@ -85,4 +83,6 @@
 			liste_crise.push( tmp );
 		</script>
 		{{ parent() }}
+		 <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+  		<script src="{{ asset('/js/maps.js') }}"></script>
 	{% endblock %}
