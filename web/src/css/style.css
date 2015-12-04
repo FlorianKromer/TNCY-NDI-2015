@@ -148,8 +148,7 @@ textarea {
     margin-bottom: 0;
 }
 .navbar-default{
-    background-color :#757575; background-image : url(../img/herbe.svg);
-    background-repeat: no-repeat;
+    background-color :#757575; background-image : url(../../img/herbe.svg);
 }
 .navbar .navbar-brand{
     height: auto;
@@ -587,4 +586,29 @@ span[data-tip]{
     h3 {
         page-break-after: avoid;
     }
+}
+
+.title1{
+    font-size : 32px;
+    font-weight: bold;
+}
+
+.FeelSecure_header{
+    color : #ffffff;
+    text-shadow : 2px 2px black;
+}
+
+.form_title{
+    float: right;
+    clear: left;
+}
+
+.form_content{
+    float: left;
+    clear: right;
+
+}
+
+.form_submit{
+    text-align: center;
 }
